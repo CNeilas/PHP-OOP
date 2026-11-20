@@ -1,6 +1,7 @@
 <?php
 
-class RebelShip extends shift{
+class RebelShip extends AbstractShip {
+
     public function getFavoriteJedi() {
         $coolJedis = array('Yoda', 'Ben Kenobi');
         $key = array_rand($coolJedis);
@@ -18,23 +19,14 @@ class RebelShip extends shift{
 
         public function getNameAndSpecs($useShortFormat = false) {
 
-        if ($useShortFormat) {
-            return sprintf(
-                '%s: %s/%s/%s (Rebel)',
-                $this->getName(),
-                $this->getWeaponPower(),
-                $this->getJediFactor,
-                $this->getStrength()
-            );
-        } else {
-            return sprintf(
-                '%s: w: %s, j: %s, s: %s (Rebel)',
-                $this->name,
-                $this->weaponPower,
-                $this->jediFactor,
-                $this->strength
-            );
-        }
+        $val = parent::getNameAndSpecs($useShortFormat);
+        $val .= ' (Rebel)';
+
+        return $val;
         
+    }
+
+    public function getJediFactor() {
+        return rand(10, 30);
     }
 }
